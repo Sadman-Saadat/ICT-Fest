@@ -6,7 +6,7 @@ const getLogin = (req, res) => {
   res.render("users/login.ejs", { error: req.flash("error") });
 };
 
-const postLogin = (req, res, next) => {
+const postLogin = async (req, res, next) => {
   passport.authenticate("local", {
     successRedirect: "/dashboard",
     failureRedirect: "/users/login",
@@ -62,8 +62,7 @@ const postRegister = (req, res) => {
                   password: hash,
                 });
                 newUser
-                  .save()
-                  .then(() => {
+                  .save().then(() => {
                     res.redirect("/users/login");
                   })
                   .catch(() => {

@@ -4,9 +4,12 @@ const app = express();
 const session = require("express-session");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
+const passport = require("passport");
 
-mongoose
-  .connect(process.env.MongoURI, {
+//Passport Strategy
+require("./config/passport")(passport);
+
+mongoose.connect(process.env.MongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -30,6 +33,8 @@ app.use(
   })
 );
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 //Body Parser
