@@ -125,4 +125,75 @@ const paymentDoneMO = (req, res) => {
         });
 };
 
-module.exports = { getMO, postMO, getMOList, deleteMO, paymentDoneMO };
+const selectMO = (req, res) => {
+    const id = req.params.id;
+
+    MathOlympiad.findOne({ _id: id })
+        .then((participant) => {
+            participant.selected = true;
+            participant
+                .save()
+                .then(() => {
+                    let error = "Participant has been selected succesfully!";
+                    req.flash("error", error);
+                    res.redirect("/MathOlympiad/list");
+                })
+                .catch(() => {
+                    let error = "Data could not be updated!";
+                    req.flash("error", error);
+                    res.redirect("/MathOlympiad/list");
+                });
+        })
+        .catch(() => {
+            let error = "Data could not be updated!";
+            req.flash("error", error);
+            res.redirect("/MathOlympiad/list");
+        });
+};
+
+const getEditMO = (req, res) => {
+    const id = req.params.id;
+
+    let info = [];
+    let error = "";
+    MathOlympiad.findOne({ _id: id })
+        .then((data) => {
+            info = data;
+            res.render("math-olympiad/edit-participant.ejs", {
+                error: req.flash("error"),
+                participant: info,
+            });
+        })
+        .catch((e) => {
+            console.log(e);
+            error = "Participant details could not be fetched!";
+            res.render("math-olympiad/editParticipant.ejs", {
+                error: req.flash("error", error),
+                participant: info,
+            });
+        });
+};
+
+const editMO = async (req, res) => {
+    const id = req.params.id;
+    const { name, category, contact, email, institution, tshirt } = req.body;
+    //console.log(req.body);
+
+    let error = "";
+
+    MathOlympiad.findOneAndUpdate(
+        { _id: id },
+        { name, category, contact, email, institution, tshirt })
+        .then((data) => {
+            error = "Update infromation successful!";
+            req.flash("error", error);
+            res.redirect("/MathOlympiad/list");
+        })
+        .catch((e) => {
+            console.log(e);
+            error = "Update information failed!";
+            res.redirect("/MathOlympiad/list");
+        });
+};
+
+module.exports = { getMO, postMO, getMOList, deleteMO, paymentDoneMO, selectMO, editMO, getEditMO };
