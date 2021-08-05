@@ -3,7 +3,8 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 const getLogin = (req, res) => {
-  res.render("users/login.ejs", { error: req.flash("error") });
+
+  res.render("../views/users/login.ejs", { error: req.flash("error") });
 };
 
 const postLogin = async (req, res, next) => {
@@ -15,7 +16,7 @@ const postLogin = async (req, res, next) => {
 };
 
 const getRegister = (req, res) => {
-  res.render("users/register.ejs", { errors: req.flash("errors") });
+  res.render("../views/users/register.ejs", { errors: req.flash("errors") });
 };
 
 const postRegister = (req, res) => {
