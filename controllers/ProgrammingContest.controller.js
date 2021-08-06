@@ -66,8 +66,20 @@ const getPCList = (req, res) => {
 
 const deletePC = (req, res) => {
     const id = req.params.id;
-    console.log(id);
-    res.render("programming-contest/list.ejs");
+    //console.log(id);
+
+    let error = "";
+    ProgrammingContest.deleteOne({ _id: req.params.id })
+        .then(() => {
+            error = "Participant Team deleted successfully!";
+            req.flash("error", error);
+            res.redirect("/ProgrammingContest/list");
+        })
+        .catch(() => {
+            error = "Failed to delete data!";
+            req.flash("error", error);
+            res.redirect("/ProgrammingContest/list");
+        });
 };
 
 module.exports = { getPC, postPC, getPCList, deletePC };
