@@ -45,7 +45,23 @@ const postPC = (req, res) => {
 };
 
 const getPCList = (req, res) => {
-    res.render("programming-contest/list.ejs");
+    let participant_teams = [];
+    let error = "";
+    ProgrammingContest.find()
+        .then((data) => {
+            participant_teams = data;
+            res.render("programming-contest/list.ejs", {
+                error: req.flash("error"),
+                teams: participant_teams,
+            });
+        })
+        .catch(() => {
+            error = "Failed to fetch participant teams";
+            res.render("ProgrammingContest/list.ejs", {
+                error: req.flash("error", error),
+                teams: participant_teams,
+            });
+        });
 };
 
 const deletePC = (req, res) => {
