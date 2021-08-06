@@ -3,8 +3,9 @@ const router = express.Router();
 
 const { ensureAuthenticated, addUserData } = require("./../middlewares/auth.middleware");
 
-const { getPC } = require('../controllers/ProgrammingContest.controller');
+const { getPC, postPC } = require('../controllers/ProgrammingContest.controller');
 
 router.get("/register", ensureAuthenticated, addUserData, getPC);
+router.post('/register', ensureAuthenticated, addUserData, postPC);
 
 module.exports = router;
