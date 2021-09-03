@@ -1,0 +1,138 @@
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="x_panel">
+                    
+                        <h2>Programming Contest <small>Edit Participant Team's Details </small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                   
+
+                    <% let success= 'Team updated successfully!'%>
+                    <% if (error.length>0) {if (error==success){%>
+                    <div class="alert alert-success"><%=error%></div>
+                    <%}else{%>
+                    <div class="alert alert-danger"><%=error%></div> 
+                    <%}%> <%}%>
+
+                    <div class="x_content">
+                        <form method="POST" action="ProgrammingContest/editparticipant/<%=team._id%>" id="demo-form2" data-parsley-validate
+                            class="form-horizontal form-label-left">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="Team Name" value="<%=team.teamname%>" id="teamname" name="teamname" required="required" class="form-control">
+                                </div>
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="Institution Name" value="<%=team.institutename%>" id="institute" name="institute" required="required" class="form-control">
+                                </div>
+                            </div>
+                            <h2>Information Regarding the Coach</h2>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="Name of the Coach" value="<%=team.coachname%>" id="coachname" name="coachname" required="required" class="form-control">
+                                </div>
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="Contact No. of the Coach" value="<%=team.coachcontact%>" id="coachcontact" name="coachcontact" required="required" class="form-control">
+                                </div>
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="E-mail of the Coach" value="<%=team.coachmail%>" id="coachmail" name="coachmail" required="required" class="form-control">
+                                </div>
+                                <label class="col-form-label"><b>T-Shirt Size of the Coach</b></label><br>
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <select class="form-control" value="<%=team.coachshirt%>" id="coachshirt" name="coachshirt" required="required">
+                                        <option value="<%=team.coachshirt%>""><%=team.coachshirt%></option>
+                                        <option value="M">Medium</option>
+                                        <option value="L">Large</option>
+                                        <option value="XL">Extra Large</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <h2>Information Regarding the Team Leader</h2>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="Name of the Team Leader" value="<%=team.leadername%>" id="leadername" name="leadername" required="required" class="form-control">
+                                </div>
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="Contact No. of the Team Leader" value="<%=team.leadercontact%>"
+                                    id="leadercontact" name="leadercontact" required="required" class="form-control">
+                                </div>
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="E-mail of the Team Leader" value="<%=team.leadermail%>" id="leadermail" name="leadermail" required="required" class="form-control">
+                                </div>
+                                <label class="col-form-label"><b>T-Shirt Size of the Team Leader</b></label><br>
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <select class="form-control" value="<%=team.leadershirt%>" id="leadershirt" name="leadershirt" required="required">
+                                        <option value="<%=team.leadershirt%>"><%=team.leadershirt%></option>
+                                        <option value="M">Medium</option>
+                                        <option value="L">Large</option>
+                                        <option value="XL">Extra Large</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <br />
+                            <h2>Information Regarding Member - 1</h2>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="Name of Member - 1" value="<%=team.mem1name%>" id="mem1name" name="mem1name" required="required" class="form-control">
+                                </div>
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="Contact No. of Member - 1" value="<%=team.mem1contact%>" id="mem1contact" name="mem1contact" required="required" class="form-control">
+                                </div>
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="E-mail of Member - 1" value="<%=team.mem1mail%>" id="mem1mail" name="mem1mail" required="required" class="form-control">
+                                </div>
+                                <label class="col-form-label"><b>T-Shirt Size of Member - 1</b></label><br>
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <select class="form-control" id="mem1shirt" name="mem1shirt" required="required">
+                                        <option value="<%=team.mem1shirt%>"><%=team.mem1shirt%></option>
+                                        <option value="M">Medium</option>
+                                        <option value="L">Large</option>
+                                        <option value="XL">Extra Large</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <br />
+                            <h2>Information Regarding Member - 2</h2>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="Name of Member - 2" value="<%=team.mem2name%>" id="mem2name" name="mem2name" required="required" class="form-control">
+                                </div>
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="Contact No. of Member - 2" value="<%=team.mem2contact%>" id="mem2contact" name="mem2contact" required="required" class="form-control">
+                                </div>
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <input type="text" placeholder="E-mail of Member - 2" value="<%=team.mem2mail%>" id="mem2mail" name="mem2mail" required="required" class="form-control">
+                                </div>
+                                <label class="col-form-label"><b>T-Shirt Size of Member - 2</b></label><br>
+                                <div class="col-md-4 col-sm-12  form-group">
+                                    <select class="form-control" id="mem2shirt" name="mem2shirt" required="required" >
+                                        <option value="<%=team.mem2shirt%>"><%=team.mem2shirt%></option>
+                                        <option value="M">Medium</option>
+                                        <option value="L">Large</option>
+                                        <option value="XL">Extra Large</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
+                                    <button class="btn btn-primary" type="reset">Reset</button>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

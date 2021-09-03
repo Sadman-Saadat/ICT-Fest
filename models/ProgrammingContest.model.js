@@ -2,96 +2,101 @@ const mongoose = require("mongoose");
 const PCSchema = new mongoose.Schema({
     teamname: {
         type: String,
-        required: true,
+        required: false,
     },
     institutename: {
         type: String,
-        required: true,
+        required: false,
     },
     total: {
         type: Number,
-        required: true,
+        required: false,
     },
     paid: {
         type: Number,
-        required: true,
+        required: false,
     },
     selected: {
         type: Boolean,
-        required: true,
+        required: false,
     },
     coachname: {
         type: String,
-        required: true,
+        required: false,
     },
     coachcontact: {
         type: String,
-        required: true,
+        required: false,
     },
     coachemail: {
         type: String,
-        required: true,
+        required: false,
     },
     tshirtcoach: {
         type: String,
-        required: true,
+        required: false,
     },
 
     teamleadername: {
         type: String,
-        required: true,
+        required: false,
     },
     teamleadercontact: {
         type: String,
-        required: true,
+        required: false,
     },
     teamleaderemail: {
         type: String,
-        required: true,
+        required: false,
     },
     tshirtteamleader: {
         type: String,
-        required: true,
+        required: false,
     },
 
     member1name: {
         type: String,
-        required: true,
+        required: false,
     },
     member1contact: {
         type: String,
-        required: true,
+        required: false,
     },
     member1email: {
         type: String,
-        required: true,
+        required: false,
     },
     tshirtmember1: {
         type: String,
-        required: true,
+        required: false,
     },
 
     member2name: {
         type: String,
-        required: true,
+        required: false,
     },
     member2contact: {
         type: String,
-        required: true,
+        required: false,
     },
     member2email: {
         type: String,
-        required: true,
+        required: false,
     },
     tshirtmember2: {
         type: String,
-        required: true,
+        required: false,
     },
 
     date: {
         type: Date,
         default: Date.now,
     },
+
+    confirmCode: {
+        type: String,
+        required: true
+    }
 });
 
 const ProgrammingContest = mongoose.model("ProgrammingContest", PCSchema);

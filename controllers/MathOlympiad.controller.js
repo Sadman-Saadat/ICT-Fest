@@ -1,4 +1,22 @@
 const MathOlympiad = require("../models/MathOlympiad.model");
+require("dotenv").config();
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+
+const Email = process.env.Email;
+const Password = process.env.Password;
+
+
+const crypto = require('crypto');
+
+const nodemailer = require('nodemailer')
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: Email,
+        pass: Password,
+    },
+})
 
 const getMO = (req, res) => {
     res.render("math-olympiad/register.ejs", { error: req.flash("error") });
@@ -25,6 +43,7 @@ const postMO = (req, res) => {
     const total = registrationFee;
     const paid = 0;
     const selected = false;
+    const confirmCode = crypto.randomBytes(20).toString('hex');
 
     let error = "";
 
@@ -44,6 +63,7 @@ const postMO = (req, res) => {
                 paid,
                 total,
                 selected,
+                confirmCode,
                 tshirt,
             });
             participant
@@ -51,6 +71,24 @@ const postMO = (req, res) => {
                 .then(() => {
                     error = "Participant has been registered successfully!!";
                     req.flash("error", error);
+
+                    const options = {
+                        to: email,
+                        from: Email,
+                        subject: 'Registration is Successful!',
+                        text: `Hello ${name},
+                        You have successfully registered to ${category} category and your confirmation code is ${confirmCode}`,
+                    }
+
+                    transporter.sendMail(options, function (err, info) {
+                        if (err) {
+                            console.log(err)
+                            return
+                        }
+                        console.log('Sent: ' + info.response)
+                    })
+
+
                     res.redirect("/MathOlympiad/register");
                 })
                 .catch(() => {
